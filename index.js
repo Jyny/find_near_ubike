@@ -1,8 +1,11 @@
+var fs = require('fs');
 var geo = require('./app.js')
 var express = require('express');
 var app = express();
 
-app.get('/near_sites/', function (req, res) {
+app.use('/', express.static('public'));
+
+app.get('/near_sites/', function (req, res){
 	//res.send('Hello World!');
 	//console.log(req.query.addr);
 	geo(req.query.addr, function(mylocation, near_sites){
@@ -10,11 +13,9 @@ app.get('/near_sites/', function (req, res) {
 			location: mylocation, 
 			near_sites: near_sites
 		};
-		res.setHeader('content-type', 'application/json');
+		res.setHeader('Content-Type', 'application/json');
 		res.send(reply);
 	});
 });
 
 var server = app.listen(8080);
-
- 
