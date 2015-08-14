@@ -42,15 +42,15 @@ var get_near_site = function(addr, next){
     get_location(addr, function(mylocation){
         get_site_data(function(sitedatas){
             var dist = function(x1, y1, x2, y2) {
-                return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2); 
+                return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
             };
             for(var site of sitedatas){
                 site.distance = dist(mylocation.longitude, mylocation.latitude, site.lng, site.lat);
             }
             sitedatas.sort(function(a,b){
-                return a.distance - b.distance;         
+                return a.distance - b.distance;
             });
-            
+
             var near_sites = sitedatas.slice(0,6);
             async.each(near_sites, function(site, next){
                 var params = {

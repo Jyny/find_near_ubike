@@ -10,7 +10,7 @@ app.get('/near_sites/', function (req, res){
     //console.log(req.query.addr);
     geo(req.query.addr, function(mylocation, near_sites){
         var reply = {
-            location: mylocation, 
+            location: mylocation,
             near_sites: near_sites
         };
         res.setHeader('Content-Type', 'application/json');
