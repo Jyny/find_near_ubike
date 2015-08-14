@@ -14,6 +14,13 @@ var near_sites_handler = function(sitedatas) {
     };
 };
 
+web_app.get('/usage_stat/', function(req, res) {
+    app.get_usage_stat(function(err, usage) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(usage);
+    });
+});
+
 app.get_site_data('data.csv', function(sitedatas) {
     web_app.get('/near_sites/', near_sites_handler(sitedatas));
     web_app.listen(8080);
