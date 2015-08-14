@@ -12,5 +12,8 @@
     "express": "^4.13.3",
     "googlemaps": "^1.0.1",
     "node-geocoder": "^2.22.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.8.0"
   }
 }

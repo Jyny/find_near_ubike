@@ -1,0 +1,6 @@
+{
+    "esnext": true,
+    "undef": true,
+    "unused": "vars",
+    "predef": ["require", "module"]
+}
