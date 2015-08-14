@@ -9,6 +9,29 @@ var get_near_site = function(addr, next) {
         }});
 };
 
+var get_usage_stat = function(next) {
+    $.ajax({
+        url: '/usage_stat',
+        data: {},
+        dataType: 'json',
+        success: function(data, status, xhr){
+            next(data);
+        }});
+};
+
+get_usage_stat(function(usage) {
+    var stat = [];
+    for (var loc in usage) {
+        stat.push([
+            '<p>',
+            '<b>', loc, '</b>', '<br/>',
+            usage[loc].ride, '人騎乘',
+            '</p>'
+        ].join(''));
+    }
+    $('#usage_stat').append(stat.join(''));
+});
+
 $('#resultModal').on('show.bs.modal', function(event) {
     var modal = $(this);
     get_near_site($('#target').val(), function(res) {
