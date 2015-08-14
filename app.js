@@ -25,9 +25,9 @@ var get_location = function(addr, next) {
     });
 };
 
-var get_site_data = function(next){
+var get_site_data = function(filename, next){
     var sitedatas = [];
-    fs.createReadStream('data.csv')
+    fs.createReadStream(filename)
     .pipe(csv())
     .on('data', function(data){
         sitedatas.push(data);
@@ -38,42 +38,44 @@ var get_site_data = function(next){
     });
 };
 
-var get_near_site = function(addr, next){
+var get_near_site = function(sitedatas, addr, next){
     get_location(addr, function(mylocation){
-        get_site_data(function(sitedatas){
-            var dist = function(x1, y1, x2, y2) {
+        var distance = function(site) {
+            var f = function(x1, y1, x2, y2) {
                 return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
             };
-            for(var site of sitedatas){
-                site.distance = dist(mylocation.longitude, mylocation.latitude, site.lng, site.lat);
-            }
-            sitedatas.sort(function(a,b){
-                return a.distance - b.distance;
-            });
+            return f(mylocation.longitude, mylocation.latitude, site.lng, site.lat);
+        };
 
-            var near_sites = sitedatas.slice(0,6);
-            async.each(near_sites, function(site, next){
-                var params = {
-                    origin: mylocation.latitude + ',' + mylocation.longitude,
-                    destination: site.lat + ',' + site.lng,
-                    mode: 'walking',
-                    language: 'zh_tw'
-                };
-                gmAPI.directions(params, function(err, res){
-                    if (!err)
-                        site.duration = res.routes[0].legs[0].duration;
-                    next(err);
+        sitedatas.sort(function(a,b){
+            return distance(a) - distance(b);
+        });
+
+        var near_sites = sitedatas.slice(0,6);
+
+        async.map(near_sites, function(site, next){
+            var params = {
+                origin: mylocation.latitude + ',' + mylocation.longitude,
+                destination: site.lat + ',' + site.lng,
+                mode: 'walking',
+                language: 'zh_tw'
+            };
+            gmAPI.directions(params, function(err, res){
+                if (err)
+                    next(err, null);
+                next(err, {
+                    duration: res.routes[0].legs[0].duration,
+                    station_name: site['sna (station name)']
                 });
-            }, function(err) {
-                near_sites.sort(function (a, b) {return a.duration - b.duration;});
-                next(mylocation, near_sites);
             });
+        }, function(err, res) {
+            res.sort(function (a, b) {return a.duration - b.duration;});
+            next(err, res);
         });
     });
 };
 
-module.exports = function(addr, next){
-    get_near_site(addr, function(mylocation, near_sites){
-        next(mylocation, near_sites);
-    });
+module.exports = {
+    get_site_data: get_site_data,
+    get_near_site: get_near_site
 };
