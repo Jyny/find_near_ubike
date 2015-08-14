@@ -35,7 +35,23 @@
   </head>
 
   <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : 'your-app-id',
+          xfbml      : true,
+          version    : 'v2.4'
+        });
+      };
 
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
@@ -79,19 +95,18 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>使用量</h2>
+          <p></p>
         </div>
         <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>廣告</h2>
+          <a href="http://imgur.com/B03epwZ"><img src="http://i.imgur.com/B03epwZ.png" title="source: imgur.com" /></a>
         </div>
         <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>粉絲團</h2>
+          <div class="fb-page" data-href="https://www.facebook.com/youbiketaipei"
+            data-width="380" data-hide-cover="false" data-show-facepile="false"
+            data-show-posts="true"></div>
         </div>
       </div>
 
