@@ -77,8 +77,3 @@ module.exports = function(addr, next){
         next(mylocation, near_sites);
     });
 };
-
-/*get_near_site("台灣大學", function(mylocation, near_sites){
-    console.log(mylocation);
-    console.log(near_sites);
-});*/
