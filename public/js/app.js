@@ -27,7 +27,7 @@ get_usage_stat(function(usage) {
             '<b>', loc, '</b>', '<br/>',
             usage[loc].ride, '人騎乘',
             '</p>'
-        ].join(''));
+            ].join(''));
     }
     $('#usage_stat').append(stat.join(''));
 });
@@ -39,11 +39,11 @@ $('#resultModal').on('show.bs.modal', function(event) {
         var duration = res.duration.text;
         var title = station_name + "⇒ 步行約 " + duration;
         var embeded =
-            (['<p>',
-             '<img src="http://ntpc.youbike.com.tw/ntpc/photos/logo/logo.png" alt="YouBike logo" id="logo">',
-             '<b>', station_name, " ⇒ 步行約 ", duration, '</b>',
-             '</p>'
-            ]).join('');
+        (['<p>',
+           '<img src="http://ntpc.youbike.com.tw/ntpc/photos/logo/logo.png" alt="YouBike logo" id="logo">',
+           '<b>', station_name, " ⇒ 步行約 ", duration, '</b>',
+           '</p>'
+           ]).join('');
         modal.find('.modal-title').text(title);
         modal.find('.modal-body textarea').text(embeded);
     });
@@ -52,4 +52,11 @@ $('#resultModal').on('show.bs.modal', function(event) {
 document.querySelector('#copybutton').addEventListener('click', function(event) {
     document.querySelector('#copytextarea').select();
     document.execCommand('copy');
+});
+
+$(window).load(function(){
+    $("#target").focus();
+});
+$(window).click(function(){
+    $("#target").focus();
 });
