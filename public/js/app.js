@@ -48,3 +48,8 @@ $('#resultModal').on('show.bs.modal', function(event) {
         modal.find('.modal-body textarea').text(embeded);
     });
 });
+
+document.querySelector('#copybutton').addEventListener('click', function(event) {
+    document.querySelector('#copytextarea').select();
+    document.execCommand('copy');
+});
