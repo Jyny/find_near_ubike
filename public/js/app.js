@@ -40,10 +40,10 @@ $('#resultModal').on('show.bs.modal', function(event) {
         var title = station_name + "⇒ 步行約 " + duration;
         var embeded =
         (['<p>',
-           '<img src="http://ntpc.youbike.com.tw/ntpc/photos/logo/logo.png" alt="YouBike logo" id="logo">',
-           '<b>', station_name, " ⇒ 步行約 ", duration, '</b>',
-           '</p>'
-           ]).join('');
+         '<img src="http://ntpc.youbike.com.tw/ntpc/photos/logo/logo.png" alt="YouBike logo" id="logo">',
+         '<b>', station_name, " ⇒ 步行約 ", duration, '</b>',
+         '</p>'
+         ]).join('');
         modal.find('.modal-title').text(title);
         modal.find('.modal-body textarea').text(embeded);
     });

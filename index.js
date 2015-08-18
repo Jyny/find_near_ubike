@@ -7,10 +7,10 @@ web_app.use('/', express.static('public'));
 var near_sites_handler = function(sitedatas) {
     return function (req, res){
         app.get_near_site(sitedatas, req.query.addr,
-                function(err, near_sites){
-                    res.setHeader('Content-Type', 'application/json');
-                    res.send(near_sites[0]);
-                });
+            function(err, near_sites){
+                res.setHeader('Content-Type', 'application/json');
+                res.send(near_sites[0]);
+            });
     };
 };
 
