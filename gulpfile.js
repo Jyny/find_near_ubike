@@ -22,7 +22,7 @@ gulp.task('node_modules', function() {
 });
 
 gulp.task('public', function() {
-    return gulp.src(['./public/**/*'])
+    return gulp.src(['./src/public/**/*'])
         .pipe(gulp.dest('./dist/public/'));
 });
 
