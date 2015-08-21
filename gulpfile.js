@@ -7,14 +7,7 @@ var convertEncoding = require('gulp-convert-encoding');
 var fs = require('fs');
 
 gulp.task('prepare', function() {
-    var existed = fs.existsSync('./dist/data.csv');
-    if (existed) {
-        gutil.log('data.csv existed. download skipped...');
-        return;
-    }
-    request('http://data.taipei.gov.tw/opendata/apply/file/NzExNEIyRUQtRDhFNS00OUZELTgxRjktRjQ3OTgwNkRCNjM1')
-        .pipe(source('data.csv'))
-        .pipe(convertEncoding({from: 'big5'}))
+    return gulp.src('./data.json')
         .pipe(gulp.dest('./dist/'));
 });
 
