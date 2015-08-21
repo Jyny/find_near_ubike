@@ -37,11 +37,15 @@ $('#resultModal').on('show.bs.modal', function(event) {
     get_near_site($('#target').val(), function(res) {
         var station_name = res.station_name;
         var duration = res.duration.text;
+        var station_no = res.station_no;
+        var link = 'http://taipei.youbike.com.tw/en/f11.php?sno=' + station_no;
         var title = station_name + "⇒ 步行約 " + duration;
         var embeded =
         (['<p>',
          '<img src="http://ntpc.youbike.com.tw/ntpc/photos/logo/logo.png" alt="YouBike logo" id="logo">',
+         '<a href="', link, '">',
          '<b>', station_name, " ⇒ 步行約 ", duration, '</b>',
+         '</a>',
          '</p>'
          ]).join('');
         modal.find('.modal-title').text(title);

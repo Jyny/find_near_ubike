@@ -27,15 +27,9 @@ var get_location = function(addr, next) {
 };
 
 var get_site_data = function(filename, next){
-    var sitedatas = [];
-    fs.createReadStream(filename)
-    .pipe(csv())
-    .on('data', function(data){
-        sitedatas.push(data);
-        //console.log(data);
-    })
-    .on('end', function() {
-        next(sitedatas);
+    fs.readFile(filename, 'utf8', function (err, data) {
+        let obj = JSON.parse(data);
+        next(err, Object.keys(obj).map(k => obj[k]));
     });
 };
 
@@ -66,7 +60,8 @@ var get_near_site = function(sitedatas, addr, next){
                     next(err, null);
                 next(err, {
                     duration: res.routes[0].legs[0].duration,
-                    station_name: site['sna (station name)']
+                    station_name: site.sna,
+                    station_no: site.sno
                 });
             });
         }, function(err, res) {

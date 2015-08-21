@@ -21,7 +21,7 @@ web_app.get('/usage_stat/', function(req, res) {
     });
 });
 
-app.get_site_data('data.csv', function(sitedatas) {
+app.get_site_data('data.json', function(err, sitedatas) {
     web_app.get('/near_sites/', near_sites_handler(sitedatas));
     web_app.listen(8080);
 });
