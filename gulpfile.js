@@ -3,6 +3,7 @@ var babel = require('gulp-babel');
 var gutil = require('gulp-util');
 var request = require('request');
 var source = require('vinyl-source-stream');
+var convertEncoding = require('gulp-convert-encoding');
 var fs = require('fs');
 
 gulp.task('prepare', function() {
@@ -13,6 +14,7 @@ gulp.task('prepare', function() {
     }
     request('http://data.taipei.gov.tw/opendata/apply/file/NzExNEIyRUQtRDhFNS00OUZELTgxRjktRjQ3OTgwNkRCNjM1')
         .pipe(source('data.csv'))
+        .pipe(convertEncoding({from: 'big5'}))
         .pipe(gulp.dest('./dist/'));
 });
 

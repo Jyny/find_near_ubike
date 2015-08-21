@@ -17,6 +17,7 @@
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
+    "gulp-convert-encoding": "0.0.3",
     "gulp-util": "^3.0.6",
     "jshint": "^2.8.0",
     "vinyl-source-stream": "^1.1.0"
